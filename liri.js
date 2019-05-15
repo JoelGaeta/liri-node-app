@@ -13,8 +13,10 @@ const dblRow =
   "=============================================================================";
 const spacer = "";
 
+var nodeArgs = process.argv;
+
 function liriSwitch() {
-  switch (process.argv[2]) {
+  switch (nodeArgs[2]) {
     case `concert-this`:
       concertCall();
       break;
@@ -51,7 +53,6 @@ function concertCall() {
 }
 
 function doWhatItSays() {
-  var nodeArgs = process.argv;
   fs.readFile("random.txt", "utf8", (error, data) => {
     if (error) {
       return console.log(error);
@@ -74,7 +75,6 @@ function movieCall() {
   });
   movieName.substring(0, movieName.length - 1);
 
-  console.log(movieName);
   var queryUrl =
     "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
   axios.get(queryUrl).then(function(response) {
@@ -96,7 +96,6 @@ const logToConsole = array => {
 };
 
 function spotifyThisSong() {
-  console.log("jsfdg");
   let songName;
   process.argv.length < 4
     ? (songName = "The Sign Ace of Base")
@@ -129,7 +128,6 @@ function spotifyThisSong() {
         let link = data.tracks.items[0].external_urls.spotify;
         logToConsole(displayArray);
         displayArray = [];
-        playTheSong(link);
       }
     }
   );
